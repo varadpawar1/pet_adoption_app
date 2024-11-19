@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage User</title>
+</head>
+<body>
+    <h1>{{ obj.data[0].id | default('New User') }}</h1>
+
+    {% if obj.errors %}
+    <div style="color: red;">
+        <ul>
+            {% for error in obj.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/users/manage?action={{ 'update' if obj.data[0].id else 'insert' }}&pkval={{ obj.data[0].id | default('') }}">
+        <!-- Email Field -->
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ obj.data[0].email | default('') }}" required><br><br>
+
+        <!-- Password Fields -->
+        <label>Password:</label><br>
+        <input type="password" name="password" placeholder="Enter new password if updating" {{ 'required' if not obj.data[0].id else '' }}><br><br>
+        <label>Retype Password:</label><br>
+        <input type="password" name="password2" placeholder="Retype new password if updating" {{ 'required' if not obj.data[0].id else '' }}><br><br>
+
+        <!-- User Type -->
+        <label>User Type:</label><br>
+        <select name="user_type" required>
+            {% for role in obj.roles %}
+            <option value="{{ role.value }}" {% if obj.data[0].user_type == role.value %}selected{% endif %}>
+                {{ role.text }}
+            </option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Zipcode -->
+        <label>Zipcode:</label><br>
+        <input type="text" name="zipcode" value="{{ obj.data[0].zipcode | default('') }}" required><br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">{{ 'Update User' if obj.data[0].id else 'Create User' }}</button>
+    </form>
+
+    <!-- Back to List Link -->
+    <br>
+    <a href="/users/manage">Back to User List</a>
+</body>
+</html>

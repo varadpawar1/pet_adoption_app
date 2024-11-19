@@ -1,0 +1,30 @@
+{% extends "loginbase.html" %}
+
+{% block content %}
+    <div class="login-container">
+        <h1>Login</h1>
+        
+        <!-- Display error or success messages -->
+        {% if msg %}
+        <div id="loginmsg" style="color: red; margin-bottom: 20px;">
+            {{ msg }}
+        </div>
+        {% endif %}
+        
+        <!-- Login form -->
+        <form action="/login" method="POST" style="max-width: 400px; margin: auto;">
+            <label for="name" style="font-weight: bold;">Username:</label><br>
+            <input type="text" id="name" name="name" placeholder="Enter your username" required
+                   style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;"><br>
+            
+            <label for="password" style="font-weight: bold;">Password:</label><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required
+                   style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;"><br>
+            
+            <button type="submit" 
+                    style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                Login
+            </button>
+        </form>
+    </div>
+{% endblock %}

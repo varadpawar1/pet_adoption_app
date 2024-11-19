@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Main Menu</h1>
+    <div id="welcome-msg" style="margin-bottom: 20px;">
+        Welcome, {{ me.name }} - {{ me.user_type }}
+    </div>
+
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+            <li><a href="/users/manage">Manage Users</a></li>
+            <li><a href="/pets/manage">Manage Pets</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+

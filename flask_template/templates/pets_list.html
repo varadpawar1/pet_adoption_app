@@ -1,0 +1,31 @@
+<h1>Manage Pets</h1>
+<a href="/pets/manage?action=new">Add New Pet</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Breed</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Status</th>
+        <th>Shelter</th>
+        <th>Actions</th>
+    </tr>
+    {% for pet in objs.data %}
+    <tr>
+        <td>{{ pet.pet_id }}</td>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.type }}</td>
+        <td>{{ pet.breed }}</td>
+        <td>{{ pet.age }}</td>
+        <td>{{ pet.gender }}</td>
+        <td>{{ pet.status }}</td>
+        <td>{{ pet.shelter_id }}</td>
+        <td>
+            <a href="/pets/manage?action=update&pkval={{ pet.pet_id }}">Edit</a> |
+            <a href="/pets/manage?action=delete&pkval={{ pet.pet_id }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
