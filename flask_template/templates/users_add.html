@@ -1,45 +1,46 @@
-<h1>Add New Pet</h1>
-<form method="POST" action="/pets/manage?action=insert">
-    <label>Name:</label><br>
-    <input type="text" name="name" required><br><br>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+</head>
+<body>
+    <h1>Add User</h1>
+    <form method="post">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
 
-    <label>Type:</label><br>
-    <input type="text" name="type" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
 
-    <label>Breed:</label><br>
-    <input type="text" name="breed" required><br><br>
+        <label for="password2">Confirm Password:</label><br>
+        <input type="password" id="password2" name="password2" required><br><br>
 
-    <label>Age:</label><br>
-    <input type="number" name="age" min="0" required><br><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
 
-    <label>Gender:</label><br>
-    <select name="gender" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-    </select><br><br>
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number"><br><br>
 
-    <label>Health Status:</label><br>
-    <input type="text" name="health_status"><br><br>
+        <label for="Address">Address:</label><br>
+        <input type="text" id="Address" name="Address"><br><br>
 
-    <label>Description:</label><br>
-    <textarea name="description"></textarea><br><br>
+        <label for="zipcode">Zip Code:</label><br>
+        <input type="text" id="zipcode" name="zipcode" required><br><br>
 
-    <label>Image URL:</label><br>
-    <input type="text" name="image_url"><br><br>
+        <label for="user_type">User Type:</label><br>
+        <select id="user_type" name="user_type">
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+        </select><br><br>
 
-    <label>Listing Date:</label><br>
-    <input type="date" name="listing_date"><br><br>
+        <label for="shelter_id">Shelter ID:</label><br>
+        <input type="text" id="shelter_id" name="shelter_id"><br><br>
 
-    <label>Status:</label><br>
-    <select name="status" required>
-        <option value="Available">Available</option>
-        <option value="Adopted">Adopted</option>
-        <option value="Pending">Pending</option>
-    </select><br><br>
+        <label for="registration_date">Registration Date:</label><br>
+        <input type="date" id="registration_date" name="registration_date" value="{{ current_date }}" required><br><br>
 
-    <label>Shelter ID:</label><br>
-    <input type="text" name="shelter_id" required><br><br>
-
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit">Add User</button>
+        <a href="/users/manage?action=list">Cancel</a>
+    </form>
+</body>
+</html>

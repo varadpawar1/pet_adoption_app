@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Adoptions</title>
+</head>
+<body>
+    <h1>Adoption Management</h1>
+    <a href="/adoptions/manage?action=new">Add New Adoption</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Adoption Date</th>
+                <th>User ID</th>
+                <th>Pet ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adoption in adoptions %}
+            <tr>
+                <td>{{ adoption['adoption_id'] }}</td>
+                <td>{{ adoption['request_date'] }}</td>
+                <td>{{ adoption['status'] }}</td>
+                <td>{{ adoption['adoption_date'] }}</td>
+                <td>{{ adoption['user_id'] }}</td>
+                <td>{{ adoption['pet_id'] }}</td>
+                <td>
+                    <a href="/adoptions/manage?action=edit&pkval={{ adoption['adoption_id'] }}">Edit</a>
+                    <a href="/adoptions/manage?action=delete&pkval={{ adoption['adoption_id'] }}" onclick="return confirm('Are you sure you want to delete this adoption?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

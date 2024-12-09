@@ -1,17 +1,61 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Edit Pet' if obj.data[0].get('pet_id') else 'Add New Pet' }}</title>
+</head>
+<body>
+    <h1>{{ 'Edit Pet' if obj.data[0].get('pet_id') else 'Add New Pet' }}</h1>
+    {% if obj.errors %}
+    <ul style="color: red;">
+        {% for error in obj.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ obj.data[0].get('name', '') }}" required><br><br>
 
-{% block content %}
-<h1>Add New Pet</h1>
-<form action="/pets/add" method="POST">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" value="{{ obj.data[0].get('type', '') }}" required><br><br>
 
-    <label for="type">Type:</label><br>
-    <input type="text" id="type" name="type" required><br><br>
+        <label for="breed">Breed:</label><br>
+        <input type="text" id="breed" name="breed" value="{{ obj.data[0].get('breed', '') }}" required><br><br>
 
-    <label for="breed">Breed:</label><br>
-    <input type="text" id="breed" name="breed" required><br><br>
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" value="{{ obj.data[0].get('age', '') }}" required><br><br>
 
-    <button type="submit">Add Pet</button>
-</form>
-{% endblock %}
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender">
+            <option value="Male" {% if obj.data[0].get('gender') == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if obj.data[0].get('gender') == 'Female' %}selected{% endif %}>Female</option>
+            <option value="Other" {% if obj.data[0].get('gender') == 'Other' %}selected{% endif %}>Other</option>
+        </select><br><br>
+
+        <label for="health_status">Health Status:</label><br>
+        <input type="text" id="health_status" name="health_status" value="{{ obj.data[0].get('health_status', '') }}" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ obj.data[0].get('description', '') }}</textarea><br><br>
+
+        <label for="image_url">Image URL:</label><br>
+        <input type="text" id="image_url" name="image_url" value="{{ obj.data[0].get('image_url', '') }}"><br><br>
+
+        <label for="listing_date">Listing Date:</label><br>
+        <input type="date" id="listing_date" name="listing_date" value="{{ obj.data[0].get('listing_date', '') }}" required><br><br>
+
+        <label for="status">Status:</label><br>
+        <select id="status" name="status">
+            <option value="Available" {% if obj.data[0].get('status') == 'Available' %}selected{% endif %}>Available</option>
+            <option value="Adopted" {% if obj.data[0].get('status') == 'Adopted' %}selected{% endif %}>Adopted</option>
+            <option value="Pending" {% if obj.data[0].get('status') == 'Pending' %}selected{% endif %}>Pending</option>
+        </select><br><br>
+
+        <label for="shelter_id">Shelter ID:</label><br>
+        <input type="number" id="shelter_id" name="shelter_id" value="{{ obj.data[0].get('shelter_id', '') }}" required><br><br>
+
+        <button type="submit">{{ 'Update Pet' if obj.data[0].get('pet_id') else 'Add Pet' }}</button>
+        <a href="/pets/manage?action=list">Cancel</a>
+    </form>
+</body>
+</html>

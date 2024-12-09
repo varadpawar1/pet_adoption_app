@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <script>
+        // Toggle Shelter ID field visibility based on user type selection
+        function toggleShelterId() {
+            const userType = document.getElementById('user_type').value;
+            const shelterIdField = document.getElementById('shelter_id_field');
+            shelterIdField.style.display = userType === 'admin' ? 'block' : 'none';
+        }
+
+        // Ensure the correct visibility is applied on page load
+        window.onload = function() {
+            toggleShelterId();
+        };
+    </script>
+</head>
+<body>
+    <h1>Create an Account</h1>
+    {% if obj.errors %}
+    <ul style="color: red;">
+        {% for error in obj.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{ obj.data[0].get('email', '') }}" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="password2">Confirm Password:</label><br>
+        <input type="password" id="password2" name="password2" required><br><br>
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ obj.data[0].get('name', '') }}" required><br><br>
+
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number" value="{{ obj.data[0].get('phone_number', '') }}"><br><br>
+
+        <label for="Address">Address:</label><br>
+        <input type="text" id="Address" name="Address" value="{{ obj.data[0].get('Address', '') }}"><br><br>
+
+        <label for="zipcode">Zip Code:</label><br>
+        <input type="text" id="zipcode" name="zipcode" value="{{ obj.data[0].get('zipcode', '') }}" required><br><br>
+
+        <label for="user_type">User Type:</label><br>
+        <select id="user_type" name="user_type" onchange="toggleShelterId()">
+            <option value="customer" {% if obj.data[0].get('user_type', 'customer') == 'customer' %}selected{% endif %}>Customer</option>
+            <option value="admin" {% if obj.data[0].get('user_type') == 'admin' %}selected{% endif %}>Administrator</option>
+        </select><br><br>
+
+        <div id="shelter_id_field" style="display: none;">
+            <label for="shelter_id">Shelter ID:</label><br>
+            <input type="number" id="shelter_id" name="shelter_id" value="{{ obj.data[0].get('shelter_id', '') }}"><br><br>
+        </div>
+
+        <!-- Hidden field for registration date -->
+        <input type="hidden" name="registration_date" value="{{ obj.data[0].get('registration_date', '') }}">
+
+        <button type="submit">Create Account</button>
+        <a href="/login">Already have an account? Login here</a>
+    </form>
+</body>
+</html>

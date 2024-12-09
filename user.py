@@ -4,7 +4,7 @@ from baseObject import baseObject
 class user(baseObject):
     def __init__(self):
         self.setup()
-        self.roles = [
+        self.user_type = [
             {'value': 'admin', 'text': 'Administrator'},
             {'value': 'customer', 'text': 'Customer'}
         ]
@@ -31,7 +31,15 @@ class user(baseObject):
         else:
             self.data[n]['password'] = self.hashPassword(self.data[n]['password'])
         
-        rl = [role['value'] for role in self.roles]
+        # Check shelter_id for admin users
+        if self.data[n]['user_type'] == 'admin' and not self.data[n].get('shelter_id'):
+            self.errors.append('Shelter ID is required for admin users.')
+
+        # Ensure shelter_id is null for non-admin users
+        if self.data[n]['user_type'] != 'admin':
+            self.data[n]['shelter_id'] = None
+        
+        rl = [user_type['value'] for user_type in self.user_type]
         if self.data[n]['user_type'] not in rl:
             self.errors.append(f'User type must be one of {rl}.')
         
@@ -63,7 +71,7 @@ class user(baseObject):
         else:
             del self.data[n]['password']  # Password unchanged
         
-        rl = [role['value'] for role in self.roles]
+        rl = [user_type['value'] for user_type in self.user_type]
         if self.data[n]['user_type'] not in rl:
             self.errors.append(f'User type must be one of {rl}.')
 

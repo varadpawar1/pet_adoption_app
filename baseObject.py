@@ -48,7 +48,7 @@ class baseObject:
         self.data[n][self.pk] = self.cur.lastrowid
     def getById(self,id):
         sql = f"Select * from `{self.tn}` where `{self.pk}` = %s" 
-        #print(sql,id)
+        print(sql,id)
         self.cur.execute(sql,(id))
         self.data = []
         for row in self.cur:
@@ -67,7 +67,7 @@ class baseObject:
             print(f'{self.tn} cannot be truncated')
     def getByField(self,field,val):
         sql = f"Select * from `{self.tn}` where `{field}` = %s" 
-        #print(sql,val)
+        print('varad',sql,val)
         self.cur.execute(sql,(val))
         self.data = []
         for row in self.cur:

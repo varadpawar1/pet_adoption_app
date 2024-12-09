@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Edit Shelter' if obj.data[0].get('shelter_id') else 'Add New Shelter' }}</title>
+</head>
+<body>
+    <h1>{{ 'Edit Shelter' if obj.data[0].get('shelter_id') else 'Add New Shelter' }}</h1>
+    {% if obj.errors %}
+    <ul style="color: red;">
+        {% for error in obj.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST">
+        <label for="shelter_name">Shelter Name:</label><br>
+        <input type="text" id="shelter_name" name="shelter_name" value="{{ obj.data[0].get('shelter_name', '') }}" required><br><br>
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" value="{{ obj.data[0].get('address', '') }}" required><br><br>
+
+        <label for="contact">Contact:</label><br>
+        <input type="text" id="contact" name="contact" value="{{ obj.data[0].get('contact', '') }}" required><br><br>
+
+        <label for="website_url">Website URL:</label><br>
+        <input type="text" id="website_url" name="website_url" value="{{ obj.data[0].get('website_url', '') }}"><br><br>
+
+        <button type="submit">{{ 'Update Shelter' if obj.data[0].get('shelter_id') else 'Add Shelter' }}</button>
+        <a href="/shelters/manage?action=list">Cancel</a>
+    </form>
+</body>
+</html>
