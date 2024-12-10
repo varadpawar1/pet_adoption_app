@@ -1,0 +1,110 @@
+/* General body and background styling */
+body {
+    background-image: url('../background_images/background.jpg'); /* Use your desired background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Background Blur Effect */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(5px); /* Slight blur for the background */
+    z-index: -1; /* Ensure the blur is behind the content */
+}
+
+/* Form container styling */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%; 
+    height: 80%;
+    padding: 1%;
+}
+
+/* The card containing the form */
+.form-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight white background for readability */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Max width for the form card */
+    width: 100%;
+    height: auto; /* Allow the card to adjust based on content */
+    box-sizing: border-box; /* Ensures padding is included in height calculation */
+    overflow-y: auto; /* Prevent overflow if content exceeds the form's height */
+}
+
+/* Styling for headers and form elements */
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in the width calculation */
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a.cancel-btn {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+a.cancel-btn:hover {
+    text-decoration: underline;
+}
+
+/* Styling for small text */
+small {
+    font-size: 0.9em;
+    color: #666;
+    display: block;
+    margin-top: 5px;
+}
