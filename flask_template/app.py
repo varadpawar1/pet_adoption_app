@@ -6,10 +6,10 @@ from datetime import timedelta
 from datetime import datetime
 import redis
 import sys
-sys.path.append('G:\My Drive\Data Driven Application\pet_adoption_app')
+sys.path.append('/Users/bprakashputta/Clarkson/DataDrivenApplications/Project/pet_adoption_app')
 import os
 
-session_dir = "g:\\My Drive\\Data Driven Application\\pet_adoption_app\\flask_session"
+session_dir = "/Users/bprakashputta/Clarkson/DataDrivenApplications/Project/pet_adoption_app/flask_session"
 if not os.path.exists(session_dir):
     os.makedirs(session_dir)
 
