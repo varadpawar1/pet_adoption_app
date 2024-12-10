@@ -6,10 +6,13 @@ from datetime import timedelta
 from datetime import datetime
 import redis
 import sys
-sys.path.append('/Users/bprakashputta/Clarkson/DataDrivenApplications/Project/pet_adoption_app')
+sys.path.append(r'G:\My Drive\Data Driven Application\pet_adoption_app')
 import os
+import matplotlib.pyplot as plt
+import io
+import base64
 
-session_dir = "/Users/bprakashputta/Clarkson/DataDrivenApplications/Project/pet_adoption_app/flask_session"
+session_dir = r"G:\My Drive\Data Driven Application\pet_adoption_app\flask_session"
 if not os.path.exists(session_dir):
     os.makedirs(session_dir)
 
@@ -160,7 +163,7 @@ def create_account():
         
         # Add the registration date (current date)
         data['registration_date'] = datetime.now().strftime('%Y-%m-%d')
-        
+        data['user_type'] = 'customer'
         # Handle shelter_id based on user_type
         if data['user_type'] == 'admin':
             if not data['shelter_id']:  # Check if shelter_id is provided
@@ -274,6 +277,123 @@ def main():
     else:
         print("Unknown user type. Redirecting to /login.")
         return redirect('/login')
+
+
+@app.route('/insights')
+def insights():
+    print("Accessing /insights route.")
+
+    # Ensure user is logged in and is an admin
+    if not session.get('user') or session['user']['user_type'] != 'admin':
+        return redirect('/login')
+
+    pet_obj = pet()
+    shelter_obj = shelter()
+
+    # --- Pets by Age Group ---
+    pet_obj.cur.execute("""
+        SELECT
+            CASE
+                WHEN age < 1 THEN '0-1 years'
+                WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
+                ELSE '3+ years'
+            END as age_group,
+            COUNT(*) as count
+        FROM VB_Pets
+        GROUP BY age_group;
+    """)
+    age_groups = pet_obj.cur.fetchall()
+    age_group_labels = [row['age_group'] for row in age_groups]
+    age_group_counts = [row['count'] for row in age_groups]
+
+    plt.figure(figsize=(6, 4))
+    plt.bar(age_group_labels, age_group_counts, color=['#ff9999', '#66b3ff', '#99ff99'])
+    plt.xlabel('Age Group')
+    plt.ylabel('Number of Pets')
+    plt.title('Pets by Age Group')
+    plt.tight_layout()
+    img_age = io.BytesIO()
+    plt.savefig(img_age, format='png')
+    img_age.seek(0)
+    age_group_graph = base64.b64encode(img_age.getvalue()).decode('utf-8')
+    plt.close()
+
+    # --- Gender Distribution of Pets ---
+    pet_obj.cur.execute("""
+        SELECT gender, COUNT(*) as count
+        FROM VB_Pets
+        GROUP BY gender;
+    """)
+    gender_data = pet_obj.cur.fetchall()
+    gender_labels = [row['gender'] for row in gender_data]
+    gender_counts = [row['count'] for row in gender_data]
+
+    plt.figure(figsize=(6, 4))
+    plt.pie(gender_counts, labels=gender_labels, autopct='%1.1f%%', colors=['#ffcccb', '#add8e6'])
+    plt.title('Gender Distribution of Pets')
+    plt.tight_layout()
+    img_gender = io.BytesIO()
+    plt.savefig(img_gender, format='png')
+    img_gender.seek(0)
+    gender_distribution_graph = base64.b64encode(img_gender.getvalue()).decode('utf-8')
+    plt.close()
+
+    # --- Shelters vs. Pet Count ---
+    shelter_obj.cur.execute("""
+        SELECT s.shelter_name as shelter_name, COUNT(p.pet_id) as pet_count
+        FROM VB_Shelters s
+        JOIN VB_Pets p ON s.shelter_id = p.shelter_id
+        GROUP BY s.shelter_name;
+    """)
+    shelter_data = shelter_obj.cur.fetchall()
+    shelter_names = [row['shelter_name'] for row in shelter_data]
+    pet_counts = [row['pet_count'] for row in shelter_data]
+
+    plt.figure(figsize=(8, 5))
+    plt.bar(shelter_names, pet_counts, color='#ffcc99')
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel('Shelters')
+    plt.ylabel('Number of Pets')
+    plt.title('Shelters vs. Pet Count')
+    plt.tight_layout()
+    img_shelter = io.BytesIO()
+    plt.savefig(img_shelter, format='png')
+    img_shelter.seek(0)
+    shelter_graph = base64.b64encode(img_shelter.getvalue()).decode('utf-8')
+    plt.close()
+
+    # --- Pets vs. Breed ---
+    pet_obj.cur.execute("""
+        SELECT breed, COUNT(*) as count
+        FROM VB_Pets
+        GROUP BY breed
+        ORDER BY count DESC
+        LIMIT 10;
+    """)
+    breed_data = pet_obj.cur.fetchall()
+    breed_names = [row['breed'] for row in breed_data]
+    breed_counts = [row['count'] for row in breed_data]
+
+    plt.figure(figsize=(8, 5))
+    plt.bar(breed_names, breed_counts, color='#99c2ff')
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel('Breed')
+    plt.ylabel('Number of Pets')
+    plt.title('Top 10 Breeds by Pet Count')
+    plt.tight_layout()
+    img_breed = io.BytesIO()
+    plt.savefig(img_breed, format='png')
+    img_breed.seek(0)
+    breed_graph = base64.b64encode(img_breed.getvalue()).decode('utf-8')
+    plt.close()
+
+    return render_template(
+        'insights.html',
+        age_group_graph=age_group_graph,
+        gender_distribution_graph=gender_distribution_graph,
+        shelter_graph=shelter_graph,
+        breed_graph=breed_graph
+    )
 
 
 @app.route('/book_appointment', methods=['POST'])

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .nav-bar {
+        background-color: #28a745; /* Green color */
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 0; /* No rounded corners */
+    }
+
+    .nav-bar a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0 20px;
+    }
+
+    .nav-bar a:hover {
+        text-decoration: underline;
+    }
+
+    .insights-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .insight-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .insight-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .insight-card h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+
+    .insight-card img {
+        width: 100%;
+        max-width: 700px;
+        border-radius: 8px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        color: #444;
+    }
+</style>
+
+<!-- Full-Width Green Navigation Bar -->
+<div class="nav-bar">
+    <a href="/main">Main Menu</a>
+    <span>|</span>
+    <span>Insights</span>
+</div>
+
+<div class="insights-container">
+    <h1>Insights</h1>
+
+    <!-- Pets by Age Group -->
+    <div class="insight-card">
+        <h2>Pets by Age Group</h2>
+        <img src="data:image/png;base64,{{ age_group_graph }}" alt="Pets by Age Group">
+    </div>
+
+    <!-- Gender Distribution of Pets -->
+    <div class="insight-card">
+        <h2>Gender Distribution of Pets</h2>
+        <img src="data:image/png;base64,{{ gender_distribution_graph }}" alt="Gender Distribution of Pets">
+    </div>
+
+    <!-- Shelters vs. Pet Count -->
+    <div class="insight-card">
+        <h2>Shelters vs. Pet Count</h2>
+        <img src="data:image/png;base64,{{ shelter_graph }}" alt="Shelters vs. Pet Count">
+    </div>
+
+    <!-- Pets vs. Breed -->
+    <div class="insight-card">
+        <h2>Top 10 Breeds by Pet Count</h2>
+        <img src="data:image/png;base64,{{ breed_graph }}" alt="Top 10 Breeds by Pet Count">
+    </div>
+</div>
+{% endblock %}

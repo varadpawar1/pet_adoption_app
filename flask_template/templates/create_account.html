@@ -47,11 +47,11 @@
         <label for="zipcode">Zip Code:</label><br>
         <input type="text" id="zipcode" name="zipcode" value="{{ obj.data[0].get('zipcode', '') }}" required><br><br>
 
-        <label for="user_type">User Type:</label><br>
+        <!-- <label for="user_type">User Type:</label><br>
         <select id="user_type" name="user_type" onchange="toggleShelterId()">
             <option value="customer" {% if obj.data[0].get('user_type', 'customer') == 'customer' %}selected{% endif %}>Customer</option>
-            <option value="admin" {% if obj.data[0].get('user_type') == 'admin' %}selected{% endif %}>Administrator</option>
-        </select><br><br>
+            <option value="admin" {% if obj.data[0].get('user_type') == 'admin' %}selected{% endif %}>Administrator</option> -->
+        <!-- </select><br><br> -->
 
         <div id="shelter_id_field" style="display: none;">
             <label for="shelter_id">Shelter ID:</label><br>
