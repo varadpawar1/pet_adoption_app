@@ -1,7 +1,7 @@
-from user import user
-from baseObject import baseObject
-from shelter import shelter
-from adoption import adoption
+from models.user import user
+from models.baseObject import baseObject
+from models.shelter import shelter
+from models.adoption import adoption
 # u = user()
 # u.truncate()
 # u.set({

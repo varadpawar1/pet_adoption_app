@@ -1,6 +1,6 @@
-from user import user
-from baseObject import baseObject
-from pet import pet
+from models.user import user
+from models.baseObject import baseObject
+from models.pet import pet
 
 u = user()
 p = pet()
