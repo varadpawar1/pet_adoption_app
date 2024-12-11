@@ -65,8 +65,10 @@
 
 
 ## SQL Queries
-```
 
+Here are some example queries from the project that we used to build the schema
+
+```
   CREATE TABLE `VB_Adoptions` (
     `adoption_id` int NOT NULL,
     `request_date` datetime NOT NULL,
@@ -76,9 +78,9 @@
     `pet_id` int DEFAULT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
+-- --------------------------------------------------------
 -- SQL query for inserting data into table `VB_Adoptions`
---
+-- --------------------------------------------------------
 
   INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
   (1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
@@ -96,7 +98,6 @@ INSERT INTO `VB_Appointments` (`appointment_id`, `appointment_date`, `status`, `
 (4, '2024-12-01 14:02:35', 'Pending', 1, 5),
 (7, '2024-12-10 13:19:13', 'Pending', 1, 5);
 
--- --------------------------------------------------------
 
 -- --------------------------------------------------------
 -- Table structure for table `VB_Pets`
