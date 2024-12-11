@@ -65,8 +65,9 @@
 
 
 ## SQL Queries
-`
-  `CREATE TABLE `VB_Adoptions` (
+```
+
+  CREATE TABLE `VB_Adoptions` (
     `adoption_id` int NOT NULL,
     `request_date` datetime NOT NULL,
     `status` varchar(50) NOT NULL,
@@ -131,20 +132,21 @@ CREATE TABLE `VB_Pets` (
   `shelter_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
 
-`
+```
 
 
 ### Transactional Queries:
 
 ```
-SELECT CASE
-            WHEN age < 1 THEN '0-1 years'
-            WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
-            ELSE '3+ years'
-        END as age_group,
-        COUNT(*) as count
-    FROM VB_Pets
-    GROUP BY age_group;
+SELECT 
+  CASE
+    WHEN age < 1 THEN '0-1 years'
+      WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
+      ELSE '3+ years'
+      END as age_group,
+  COUNT(*) as count
+  FROM VB_Pets
+  GROUP BY age_group;
 
 SELECT gender, COUNT(*) as count
 FROM VB_Pets
