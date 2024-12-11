@@ -5,7 +5,7 @@
 - Bhanu Prakash Putta
 
 ## Narrative
-The Pet Adoption System is designed to connect potential pet adopters with animals in need of a home. This application provides a platform where users can browse pets available for adoption, learn about each pet’s details, and submit adoption requests. Admins and shelter workers can manage pet listings, user information, and adoption requests. The system ensures a seamless adoption process by maintaining clear roles for different types of users and ensuring data integrity throughout the process.
+  The Pet Adoption System is designed to connect potential pet adopters with animals in need of a home. This application provides a platform where users can browse pets available for adoption, learn about each pet’s details, and submit adoption requests. Admins can manage pet listings, user information, and adoption requests. The system ensures a seamless adoption process by maintaining clear roles for different types of users and ensuring data integrity throughout the process.
 
 ### Primary Use Cases:
 1. **View available pets for adoption** - Users can browse through pets listed by different shelters and view detailed information on each pet.
@@ -14,6 +14,7 @@ The Pet Adoption System is designed to connect potential pet adopters with anima
 4. **View adoption requests** - Admins can review adoption requests and approve or deny them.
 5. **User Registration and Login** - Users can create accounts, login, and manage their profiles.
 6. **Book an Appointment** - A customer will have an option to book an appointment to adopt a pet from a shelter. By default it will have status 'Pending' and admin can update the appointment 'Scheduled', 'Completed', 'Cancelled'.
+
 ### User Roles:
 1. **Admin**
    - Main Purpose: Admins have full control over the application. They can manage all user roles, review adoption requests, and make decisions about the adoption process.
