@@ -98,9 +98,9 @@ INSERT INTO `VB_Appointments` (`appointment_id`, `appointment_date`, `status`, `
 
 -- --------------------------------------------------------
 
---
+-- --------------------------------------------------------
 -- Table structure for table `VB_Pets`
---
+-- --------------------------------------------------------
 
 CREATE TABLE `VB_Pets` (
   `pet_id` int NOT NULL,
@@ -131,6 +131,9 @@ INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_d
 ALTER TABLE `VB_Users`
   ADD CONSTRAINT `VB_Users_ibfk_1` FOREIGN KEY (`shelter_id`) REFERENCES `VB_Shelters` (`shelter_id`);
 COMMIT;
+
+
+
 
 SELECT 
   CASE
