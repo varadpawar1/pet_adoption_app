@@ -5,6 +5,7 @@
 - Bhanu Prakash Putta
 
 ## Narrative
+  
   The Pet Adoption System is designed to connect potential pet adopters with animals in need of a home. This application provides a platform where users can browse pets available for adoption, learn about each pet’s details, and submit adoption requests. Admins can manage pet listings, user information, and adoption requests. The system ensures a seamless adoption process by maintaining clear roles for different types of users and ensuring data integrity throughout the process.
 
 ### Primary Use Cases:
