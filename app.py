@@ -45,44 +45,9 @@ from datetime import datetime
 import yaml
 
 
-#create Flask app instance
+# Create Flask app instance
 app = Flask(__name__,static_url_path='')
-# app.config['SESSION_FILE_DIR'] = session_dir
-# app.config['SESSION_TYPE'] = 'filesystem'
 
-# from cachelib.file import FileSystemCache
-# import os
-
-# class GracefulFileSystemCache(FileSystemCache):
-#     def _run_safely(self, fn, *args, **kwargs):
-#         try:
-#             return fn(*args, **kwargs)
-#         except FileNotFoundError:
-#             # Handle the missing file gracefully
-#             return None
-
-# # Update Flask's session cache
-# app.session_interface.cache = GracefulFileSystemCache(
-#     cache_dir="g:\\My Drive\\Data Driven Application\\pet_adoption_app\\flask_session"
-# )
-# app.config['SESSION_TYPE'] = 'sqlalchemy'
-# app.config['SESSION_SQLALCHEMY'] = 'sqlite:///sessions.db'
-# Session(app)
-# import shutil
-
-# session_dir = "g:\\My Drive\\Data Driven Application\\pet_adoption_app\\flask_session"
-# shutil.rmtree(session_dir)
-# os.makedirs(session_dir)  # Recreate the directory
-
-# # Redis configuration
-# app.config['SESSION_TYPE'] = 'redis'
-# app.config['SESSION_PERMANENT'] = False
-# app.config['SESSION_USE_SIGNER'] = True
-# app.config['SESSION_KEY_PREFIX'] = 'flask_session:'
-# app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379)
-
-# Initialize the session
-# Session(app)
 # Load configuration
 with open('config.yml', 'r') as file:
     config = yaml.safe_load(file)
@@ -191,8 +156,9 @@ def create_account():
         u.set(data)  # Set data in the user object
         
         # Validate and create the account
-        if u.verify_new():  # Assuming `verify_new` validates the user data
-            u.insert()  # Insert into the database
+        # Assuming `verify_new` validates the user data
+        if u.verify_new():  
+            u.insert() 
             return redirect('/login')  # Redirect to login after successful account creation
         else:
             # Render the form with errors if validation fails
@@ -230,16 +196,6 @@ def login():
     msg = session.pop('msg', 'Type your email and password to continue.')
     return render_template('login.html', title='Login', msg=msg)
   
-    
-# @app.route('/logout',methods = ['GET','POST'])
-# def logout():
-#         # If user is already logged in, redirect to the main page
-#     if session.get('user'):
-#         return redirect('/main')
-#     if session.get('user') is not None:
-#         del session['user']
-#         del session['active']
-#     return render_template('login.html', title='Login', msg='You have logged out.')
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
@@ -250,7 +206,6 @@ def logout():
 
     print("Redirecting to /login.")
     return redirect('/login')
-
 
 
 @app.route('/main')

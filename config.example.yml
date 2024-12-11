@@ -1,0 +1,13 @@
+db:
+  host: 'example.com'
+  user: 'test_user'
+  passwd: 'test_pass'
+  db: 'test_db'
+  port: 3306
+tables:
+  shelter: 'VB_Shelters'
+  user: 'VB_Users'
+  pet: 'VB_Pets'
+  adoption: 'VB_Adoptions'
+  appointment: 'VB_Appointments'
+
