@@ -28,15 +28,17 @@
 ## Relational Diagram
 [Insert relational diagram here, reflecting the updated version of the app.]
 
-### ER Diagram (Optional)
+### ER Diagram
 ![ER Diagram](./ER_Diagram.jpeg)
 
 
 ## Credentials per User Role
-| User Role       | Username   | Password   |
-|-----------------|------------|------------|
-| Admin          | pawarv@example.com   | 134  |
-| Customer | Bhanu@example.com  | 123|
+
+| User Role       | Username   | Password             |
+|-----------------|------------|----------------------|
+| Admin           | pawarv@example.com         | 134  |
+| Customer        | bhanu@example.com          | 123  |
+| Customer        | Tyler@example.com          | 1234 |
 
 
 ## SQL Queries
