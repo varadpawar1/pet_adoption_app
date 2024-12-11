@@ -1,209 +1,126 @@
+# Pet Adoption System
 
-# 🐾 **Pet Adoption Management System**
+## Group Members:
+- Varad Pawar
+- Bhanu Prakash Putta
 
-This project is a web application designed to facilitate pet adoptions and shelter management. It allows administrators to manage users, shelters, pets, adoptions, and appointments, while customers can browse pets, book appointments, and request adoptions.
+## Narrative
+The Pet Adoption System is designed to connect potential pet adopters with animals in need of a home. This application provides a platform where users can browse pets available for adoption, learn about each pet’s details, and submit adoption requests. Admins and shelter workers can manage pet listings, user information, and adoption requests. The system ensures a seamless adoption process by maintaining clear roles for different types of users and ensuring data integrity throughout the process.
 
-## Table of Contents
+### Primary Use Cases:
+1. **View available pets for adoption** - Users can browse through pets listed by different shelters and view detailed information on each pet.
+2. **Adopt a pet** - Potential adopters can submit an adoption request for a pet they are interested in.
+3. **Manage pet listings** - Admins can add, update, or delete pet listings.
+4. **View adoption requests** - Admins can review adoption requests and approve or deny them.
+5. **User Registration and Login** - Users can create accounts, login, and manage their profiles.
+6. **Book an Appointment** - A customer will have an option to book an appointment to adopt a pet from a shelter. By default it will have status 'Pending' and admin can update the appointment 'Scheduled', 'Completed', 'Cancelled'.
+### User Roles:
+1. **Admin**
+   - Main Purpose: Admins have full control over the application. They can manage all user roles, review adoption requests, and make decisions about the adoption process.
+   
+2. **Customer**
+   - Main Purpose: Adopters can view pet listings, submit adoption requests, and view shelter listing. They cannot manage user roles.
+   
 
-1. [Features](#features)
-2. [Technologies Used](#technologies-used)
-3. [Setup Instructions](#setup-instructions)
-4. [Database Schema](#database-schema)
-5. [Folder Structure](#folder-structure)
-6. [Key Functionalities](#key-functionalities)
-7. [Screenshots](#screenshots)
-8. [License](#license)
+## Relational Diagram
+[Insert relational diagram here, reflecting the updated version of the app.]
 
----
-
-## Features
-
-### For **Customers**
-- View available shelters and pets.
-- Book appointments to visit shelters.
-- Request pet adoptions.
-- View the status of their appointment or adoption request.
-- Secure user authentication and session management.
-
-### For **Admins**
-- Manage users (add, update, delete).
-- Manage shelters (add, update, delete).
-- Manage pets (add, update, delete).
-- Manage adoptions and appointments.
-- Secure access to admin options.
-
-## Technologies Used
-
-- **Backend**: Flask (Python)
-- **Database**: SQLAlchemy (MySQL)
-- **Frontend**: HTML, CSS, JavaScript
-- **Templates**: Jinja2
-- **Image Handling**: Static files for pet and shelter images
-- **Deployment**: Flask development server
-
----
-
-## Setup Instructions
-
-Follow these steps to set up and run the project locally:
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/pet-adoption-system.git
-   cd pet-adoption-system
-   ```
-
-2. **Create a virtual environment**:
-   ```bash
-   python -m venv venv
-   ```
-
-3. **Activate the virtual environment**:
-   - **Windows**:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - **macOS/Linux**:
-     ```bash
-     source venv/bin/activate
-     ```
-
-4. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Set up the database**:
-   - Update `SQLALCHEMY_DATABASE_URI` in `app.py` with your MySQL credentials:
-     ```python
-     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/db_name'
-     ```
-   - Initialize the database:
-     ```bash
-     flask db init
-     flask db migrate -m "Initial migration."
-     flask db upgrade
-     ```
-
-6. **Run the Flask app**:
-   ```bash
-   flask run
-   ```
-   The app should be accessible at `http://127.0.0.1:5000`.
-
----
-
-## Database Schema
-
-### Shelters Table
-```sql
-CREATE TABLE shelters (
-    shelter_id INT AUTO_INCREMENT PRIMARY KEY,
-    shelter_name VARCHAR(100),
-    address VARCHAR(255),
-    contact VARCHAR(50),
-    website_url VARCHAR(255)
-);
-```
-
-### Pets Table
-```sql
-CREATE TABLE pets (
-    pet_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    type VARCHAR(50),
-    breed VARCHAR(100),
-    age INT,
-    health_status VARCHAR(100),
-    shelter_id INT,
-    adoption_requested BOOLEAN DEFAULT FALSE,
-    appointment_booked BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (shelter_id) REFERENCES shelters(shelter_id)
-);
-```
-
-### Users Table
-```sql
-CREATE TABLE users (
-    uid INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    password VARCHAR(255),
-    role VARCHAR(50)
-);
-```
-
----
-
-## Folder Structure
-
-```
-pet-adoption-system/
-│
-├── static/
-│   ├── Pets/
-│   │   ├── dog1.png
-│   │   ├── cat1.png
-│   │   └── ...
-│   └── css/
-│       └── styles.css
-│
-├── templates/
-│   ├── base.html
-│   ├── customer_main.html
-│   ├── manage_user.html
-│   └── ...
-│
-├── app.py
-├── models.py
-├── requirements.txt
-└── README.md
-```
-
----
-
-## Key Functionalities
-
-### 1. **Customer Main Menu**
-   - Displays shelters and pets.
-   - Allows customers to:
-     - Book appointments.
-     - Request adoptions.
-   - Template: `customer_main.html`
-
-### 2. **Admin User Management**
-   - Add, update, and delete users.
-   - Form includes fields for name, password, role.
-   - Template: `manage_user.html`
-
-### 3. **Navigation Protection**
-   - Prevent back navigation after logout using JavaScript:
-     ```html
-     <script>
-         history.pushState(null, document.title, location.href);
-         window.addEventListener('popstate', function () {
-             history.pushState(null, document.title, location.href);
-         });
-     </script>
-     ```
-
-### 4. **Pet Images**
-   - Pet images are stored in the `static/Pets/` folder and displayed dynamically using:
-     ```html
-     <img src="{{ url_for('static', filename='Pets/' ~ pet.name ~ '.png') }}" alt="{{ pet.name }}">
-     ```
-
----
-
-## Screenshots
-
-### **Customer Main Menu**
-![Customer Main Menu](static/screenshots/customer_main.png)
-
-### **Manage Users Form**
-![Manage Users Form](static/screenshots/manage_user.png)
-
----
+### ER Diagram (Optional)
+[Insert an ER diagram here if needed.]
 
 
-### 🚀 **Happy Coding!** 🐶🐱
+## Credentials per User Role
+| User Role       | Username   | Password   |
+|-----------------|------------|------------|
+| Admin          | pawarv@example.com   | 134  |
+| Customer | Bhanu@example.com  | 123|
+
+
+## SQL Queries
+`
+`CREATE TABLE `VB_Adoptions` (
+  `adoption_id` int NOT NULL,
+  `request_date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `adoption_date` datetime DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `pet_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `VB_Adoptions`
+--
+
+INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
+(1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
+(4, '2024-11-19 00:00:00', 'Pending', NULL, 8, 2),
+(5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1),
+(7, '2024-11-15 00:00:00', 'Pending', NULL, 8, 3),
+(8, '2024-12-01 14:03:11', 'Pending', NULL, 5, 3),
+(9, '2024-12-08 19:17:46', 'Pending', NULL, 5, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `VB_Appointments`
+--
+
+CREATE TABLE `VB_Appointments` (
+  `appointment_id` int NOT NULL,
+  `appointment_date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `shelter_id` int NOT NULL,
+  `user_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `VB_Appointments`
+--
+
+INSERT INTO `VB_Appointments` (`appointment_id`, `appointment_date`, `status`, `shelter_id`, `user_id`) VALUES
+(3, '2024-11-19 00:00:00', 'Scheduled', 1, 8),
+(4, '2024-12-01 14:02:35', 'Scheduled', 1, 5),
+(7, '2024-12-10 13:19:13', 'Scheduled', 1, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `VB_Pets`
+--
+
+CREATE TABLE `VB_Pets` (
+  `pet_id` int NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `breed` varchar(50) NOT NULL,
+  `age` int NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `health_status` varchar(50) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `image_url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `listing_date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `shelter_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
+
+`
+
+
+### Transactional Queries:
+
+`
+SELECT
+            CASE
+                WHEN age < 1 THEN '0-1 years'
+                WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
+                ELSE '3+ years'
+            END as age_group,
+            COUNT(*) as count
+        FROM VB_Pets
+        GROUP BY age_group;
+
+SELECT gender, COUNT(*) as count
+FROM VB_Pets
+GROUP BY gender;
+`
 

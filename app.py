@@ -384,7 +384,7 @@ def book_appointment():
         INSERT INTO VB_Appointments (appointment_date, status, shelter_id, user_id)
         VALUES (%s, %s, %s, %s)
     """
-    values = (appointment_date, 'Scheduled', shelter_id, user_id)
+    values = (appointment_date, 'Pending', shelter_id, user_id)
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -738,7 +738,7 @@ def manage_appointment():
         # Initialize default data for the form
         appt.data = [{
             'appointment_date': datetime.now().strftime('%Y-%m-%d'),  # Default to today's date
-            'status': 'Scheduled',  # Default status is Scheduled
+            'status': 'Pending',  # Default status is Scheduled
             'shelter_id': '',  # No default shelter ID
             'user_id': ''  # No default user ID
         }]
