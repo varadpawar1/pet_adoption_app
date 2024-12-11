@@ -9,6 +9,7 @@
   The Pet Adoption System is designed to connect potential pet adopters with animals in need of a home. This application provides a platform where users can browse pets available for adoption, learn about each pet’s details, and submit adoption requests. Admins can manage pet listings, user information, and adoption requests. The system ensures a seamless adoption process by maintaining clear roles for different types of users and ensuring data integrity throughout the process.
 
 ### Primary Use Cases:
+
 1. **View available pets for adoption** - Users can browse through pets listed by different shelters and view detailed information on each pet.
 2. **Adopt a pet** - Potential adopters can submit an adoption request for a pet they are interested in.
 3. **Manage pet listings** - Admins can add, update, or delete pet listings.
@@ -28,7 +29,7 @@
 [Insert relational diagram here, reflecting the updated version of the app.]
 
 ### ER Diagram (Optional)
-[Insert an ER diagram here if needed.]
+[ER Diagram](./ER_Diagram.jpeg)
 
 
 ## Credentials per User Role
