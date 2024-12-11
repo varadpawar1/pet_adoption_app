@@ -13,8 +13,8 @@
                 <th>Request Date</th>
                 <th>Status</th>
                 <th>Adoption Date</th>
-                <th>User ID</th>
-                <th>Pet ID</th>
+                <th>User Name</th>
+                <th>Pet Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,9 +24,21 @@
                 <td>{{ adoption['adoption_id'] }}</td>
                 <td>{{ adoption['request_date'] }}</td>
                 <td>{{ adoption['status'] }}</td>
-                <td>{{ adoption['adoption_date'] }}</td>
-                <td>{{ adoption['user_id'] }}</td>
-                <td>{{ adoption['pet_id'] }}</td>
+                <td>{{ adoption['adoption_date'] or 'N/A' }}</td>
+                <td>
+                    {% for user in users %}
+                        {% if user['user_id'] == adoption['user_id'] %}
+                            {{ user['name'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for pet in pets %}
+                        {% if pet['pet_id'] == adoption['pet_id'] %}
+                            {{ pet['name'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="/adoptions/manage?action=edit&pkval={{ adoption['adoption_id'] }}">Edit</a>
                     <a href="/adoptions/manage?action=delete&pkval={{ adoption['adoption_id'] }}" onclick="return confirm('Are you sure you want to delete this adoption?')">Delete</a>

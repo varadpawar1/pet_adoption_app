@@ -12,8 +12,8 @@
                 <th>ID</th>
                 <th>Appointment Date</th>
                 <th>Status</th>
-                <th>Shelter ID</th>
-                <th>User ID</th>
+                <th>Shelter Name</th>
+                <th>User Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,8 +23,20 @@
                 <td>{{ appt['appointment_id'] }}</td>
                 <td>{{ appt['appointment_date'] }}</td>
                 <td>{{ appt['status'] }}</td>
-                <td>{{ appt['shelter_id'] }}</td>
-                <td>{{ appt['user_id'] }}</td>
+                <td>
+                    {% for shelter in shelters %}
+                        {% if shelter['shelter_id'] == appt['shelter_id'] %}
+                            {{ shelter['shelter_name'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for user in users %}
+                        {% if user['user_id'] == appt['user_id'] %}
+                            {{ user['name'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="/appointments/manage?action=edit&pkval={{ appt['appointment_id'] }}">Edit</a>
                     <a href="/appointments/manage?action=delete&pkval={{ appt['appointment_id'] }}" onclick="return confirm('Are you sure you want to delete this appointment?')">Delete</a>

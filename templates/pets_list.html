@@ -17,7 +17,7 @@
                 <th>Gender</th>
                 <th>Health Status</th>
                 <th>Status</th>
-                <th>Shelter ID</th>
+                <th>Shelter Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,7 +32,13 @@
                 <td>{{ pet['gender'] }}</td>
                 <td>{{ pet['health_status'] }}</td>
                 <td>{{ pet['status'] }}</td>
-                <td>{{ pet['shelter_id'] }}</td>
+                <td>
+                    {% for shelter in shelters %}
+                        {% if shelter['shelter_id'] == pet['shelter_id'] %}
+                            {{ shelter['shelter_name'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="/pets/manage?action=edit&pkval={{ pet['pet_id'] }}">Edit</a>
                     <a href="/pets/manage?action=delete&pkval={{ pet['pet_id'] }}" onclick="return confirm('Are you sure you want to delete this pet?')">Delete</a>

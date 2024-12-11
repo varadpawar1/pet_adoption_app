@@ -573,13 +573,15 @@ def manage_pet():
         return redirect('/login')
 
     p = pet()  # Assuming `pet` is the model class for managing pets
+    s = shelter()
     action = request.args.get('action', 'list')  # Default action is 'list'
     pkval = request.args.get('pkval')  # Primary key value (pet_id)
 
     # List Pets
     if action == 'list':
         p.getAll()
-        return render_template('pets_list.html', pets=p.data)
+        s.getAll()
+        return render_template('pets_list.html', pets=p.data, shelters= s.data)
 
     # Add New Pet
     if action == 'new':
@@ -681,13 +683,17 @@ def manage_adoption():
         return redirect('/login')
 
     a = adoption()  # Assuming `adoption` is the model class for managing adoptions
+    u = user()
+    p = pet()
     action = request.args.get('action', 'list')  # Default action is 'list'
     pkval = request.args.get('pkval')  # Primary key value (adoption_id)
 
     # List Adoptions
     if action == 'list':
         a.getAll()
-        return render_template('adoptions_list.html', adoptions=a.data)
+        p.getAll()
+        u.getAll()
+        return render_template('adoptions_list.html', adoptions=a.data, pets=p.data, users=u.data)
 
         # Add New Adoption
     if action == 'new':
@@ -717,8 +723,8 @@ def manage_adoption():
             'request_date': datetime.now().strftime('%Y-%m-%d'),  # Default to today's date
             'status': 'Pending',  # Default status is Pending
             'adoption_date': None,  # Default to NULL
-            'user_id': '',  # No default user ID
-            'pet_id': ''  # No default pet ID
+            'user_name': '',  # No default user ID
+            'pet_name': ''  # No default pet ID
         }]
         return render_template('adoptions_add.html', obj=a)
 
@@ -752,13 +758,17 @@ def manage_appointment():
         return redirect('/login')
 
     appt = appointment()  # Assuming `appointment` is the model class for managing appointments
+    s = shelter()
+    u = user()
     action = request.args.get('action', 'list')  # Default action is 'list'
     pkval = request.args.get('pkval')  # Primary key value (appointment_id)
 
     # List Appointments
     if action == 'list':
         appt.getAll()
-        return render_template('appointments_list.html', appointments=appt.data)
+        u.getAll()
+        s.getAll()
+        return render_template('appointments_list.html', appointments=appt.data, users=u.data, shelters=s.data)
 
     # Add New Appointment
     if action == 'new':
