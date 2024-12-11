@@ -38,26 +38,26 @@ The Pet Adoption System is designed to connect potential pet adopters with anima
 
 ## SQL Queries
 `
-`CREATE TABLE `VB_Adoptions` (
-  `adoption_id` int NOT NULL,
-  `request_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `adoption_date` datetime DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `pet_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `CREATE TABLE `VB_Adoptions` (
+    `adoption_id` int NOT NULL,
+    `request_date` datetime NOT NULL,
+    `status` varchar(50) NOT NULL,
+    `adoption_date` datetime DEFAULT NULL,
+    `user_id` int DEFAULT NULL,
+    `pet_id` int DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `VB_Adoptions`
 --
 
-INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
-(1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
-(4, '2024-11-19 00:00:00', 'Pending', NULL, 8, 2),
-(5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1),
-(7, '2024-11-15 00:00:00', 'Pending', NULL, 8, 3),
-(8, '2024-12-01 14:03:11', 'Pending', NULL, 5, 3),
-(9, '2024-12-08 19:17:46', 'Pending', NULL, 5, 2);
+  INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
+  (1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
+  (4, '2024-11-19 00:00:00', 'Pending', NULL, 8, 2),
+  (5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1),
+  (7, '2024-11-15 00:00:00', 'Pending', NULL, 8, 3),
+  (8, '2024-12-01 14:03:11', 'Pending', NULL, 5, 3),
+  (9, '2024-12-08 19:17:46', 'Pending', NULL, 5, 2);
 
 -- --------------------------------------------------------
 
