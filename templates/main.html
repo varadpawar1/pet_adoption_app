@@ -1,77 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Main Page</title>
-    <style>
-        /* General Reset */
-        body, h1, h2, p, ul, li, a {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        header {
-            background-color: #4caf50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1rem;
-        }
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            margin-bottom: 10px;
-            color: #4caf50;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li {
-            margin-bottom: 10px;
-        }
-        ul li a {
-            text-decoration: none;
-            color: #2196f3;
-            font-weight: bold;
-        }
-        ul li a:hover {
-            color: #1769aa;
-        }
-        .logout-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #f44336;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        .logout-btn:hover {
-            background-color: #d32f2f;
-        }
-    </style>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/styles/main.css">
     <script>
         // Disable browser back navigation
         history.pushState(null, document.title, location.href);
@@ -81,21 +12,21 @@
     </script>
 </head>
 <body>
-    <header>
+    <header class="dashboard-header">
         <h1>Welcome, {{ session['user']['name'] }}</h1>
         <p>Your email: {{ session['user']['email'] }}</p>
         <p>User type: {{ session['user']['user_type'] }}</p>
     </header>
-    <div class="content">
+    <div class="dashboard-content">
         {% if session['user']['user_type'] == 'admin' %}
             <h2>Admin Options</h2>
-            <ul>
+            <ul class="admin-links">
                 <li><a href="/users/manage">Manage Users</a></li>
                 <li><a href="/shelters/manage">Manage Shelters</a></li>
                 <li><a href="/adoptions/manage">Manage Adoptions</a></li>
                 <li><a href="/appointments/manage">Manage Appointments</a></li>
                 <li><a href="/pets/manage">Manage Pets</a></li>
-                <li><a href="/insights">View Insights</a></li>  <!-- New link for Insights -->
+                <li><a href="/insights">View Insights</a></li>
             </ul>
         {% endif %}
         <a href="/logout" class="logout-btn">Logout</a>

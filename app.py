@@ -27,7 +27,7 @@ if not os.path.exists(session_dir):
 
 # Print the paths for debugging
 print(f"Project root: {project_root}")
-print(f"Session directory: {session_dir}")
+# print(f"Session directory: {session_dir}")
 
 import matplotlib.pyplot as plt
 import io
