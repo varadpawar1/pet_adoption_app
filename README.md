@@ -77,39 +77,24 @@
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `VB_Adoptions`
+-- SQL query for inserting data into table `VB_Adoptions`
 --
 
   INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
   (1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
   (4, '2024-11-19 00:00:00', 'Pending', NULL, 8, 2),
-  (5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1),
-  (7, '2024-11-15 00:00:00', 'Pending', NULL, 8, 3),
-  (8, '2024-12-01 14:03:11', 'Pending', NULL, 5, 3),
-  (9, '2024-12-08 19:17:46', 'Pending', NULL, 5, 2);
+  (5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1)
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `VB_Appointments`
---
-
-CREATE TABLE `VB_Appointments` (
-  `appointment_id` int NOT NULL,
-  `appointment_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `shelter_id` int NOT NULL,
-  `user_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `VB_Appointments`
+-- SQL query for inserting data into table `VB_Appointments`
 --
 
 INSERT INTO `VB_Appointments` (`appointment_id`, `appointment_date`, `status`, `shelter_id`, `user_id`) VALUES
 (3, '2024-11-19 00:00:00', 'Scheduled', 1, 8),
-(4, '2024-12-01 14:02:35', 'Scheduled', 1, 5),
-(7, '2024-12-10 13:19:13', 'Scheduled', 1, 5);
+(4, '2024-12-01 14:02:35', 'Pending', 1, 5),
+(7, '2024-12-10 13:19:13', 'Pending', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -135,9 +120,18 @@ CREATE TABLE `VB_Pets` (
 ```
 
 
-### Transactional Queries:
+### Transactional vs Analytical Queries:
 
 ```
+INSERT INTO `VB_Adoptions` (`adoption_id`, `request_date`, `status`, `adoption_date`, `user_id`, `pet_id`) VALUES
+(1, '2024-11-01 00:00:00', 'Approved', '2024-11-15 00:00:00', 5, 3),
+(4, '2024-11-19 00:00:00', 'Pending', NULL, 8, 2),
+(5, '2024-11-19 00:00:00', 'Approved', '2024-11-19 00:00:00', 7, 1)
+
+ALTER TABLE `VB_Users`
+  ADD CONSTRAINT `VB_Users_ibfk_1` FOREIGN KEY (`shelter_id`) REFERENCES `VB_Shelters` (`shelter_id`);
+COMMIT;
+
 SELECT 
   CASE
     WHEN age < 1 THEN '0-1 years'
