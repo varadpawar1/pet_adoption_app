@@ -30,27 +30,12 @@
 
 ## Relationships
 
-1. - One shelter can have multiple users.
-
-
-2. - One shelter can have multiple pets available for adoption.
-  
-3.⁠ ⁠*VB_Users to VB_Appointments*
-   - One user can have multiple appointments.
-   - ⁠ VB_Appointments.user_id ⁠ references ⁠ VB_Users.user_id ⁠.
-
-4.⁠ ⁠*VB_Shelters to VB_Appointments*
-   - One shelter can have multiple appointments.
-   - ⁠ VB_Appointments.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
-
-5.⁠ ⁠*VB_Users to VB_Adoptions*
-   - One user can adopt multiple pets.
-   - ⁠ VB_Adoptions.user_id ⁠ references ⁠ VB_Users.user_id ⁠.
-
-6.⁠ ⁠*VB_Pets to VB_Adoptions*
-   - One pet can be adopted by one user.
-   - ⁠ VB_Adoptions.pet_id ⁠ references ⁠ VB_Pets.pet_id ⁠.
-
+1. One shelter can have multiple users.
+2. One shelter can have multiple pets available for adoption.
+3. One user can have multiple appointments.⁠
+4. One shelter can have multiple appointments.
+5. One user can adopt multiple pets.
+6. One pet can be adopted by one user.
 
 ## Credentials per User Role
 
