@@ -23,6 +23,8 @@
    
 2. **Customer**
    - Main Purpose: Adopters can view pet listings, submit adoption requests, and view shelter listing. They cannot manage user roles.
+
+- **Note** - Fore future scope, we could implement a shelter owner role, where we could provide them much more functionality with adding pets, and making and updating appointments as needed.
    
 ### ER Diagram
 ![ER Diagram](./ER_Diagram.jpeg)
@@ -30,12 +32,12 @@
 
 ## Relationships
 
-1. One shelter can have multiple users.
+1. One shelter can have multiple customers
 2. One shelter can have multiple pets available for adoption.
-3. One user can have multiple appointments.⁠
+3. One user can make multiple appointments.⁠
 4. One shelter can have multiple appointments.
 5. One user can adopt multiple pets.
-6. One pet can be adopted by one user.
+6. One pet can be adopted by only one user.
 
 ## Credentials per User Role
 

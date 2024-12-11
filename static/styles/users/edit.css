@@ -78,6 +78,8 @@ body::before {
     margin-left: 270px; /* Create space for the sidebar */
     padding: 20px;
     width: calc(100% - 270px);
+    display: flex;
+    justify-content: center; /* Center content */
 }
 
 /* Form card styling */
@@ -89,6 +91,7 @@ body::before {
     max-width: 600px;
     width: 100%;
     box-sizing: border-box;
+    margin: 0 auto; /* Center the form */
 }
 
 /* Styling for headers and form elements */

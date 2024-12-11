@@ -131,6 +131,10 @@ def update_active_session():
         session['active'] = time.time()
 
 
+# 1 USER ROUTES
+
+
+# Registration of User Route
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
     # If user is already logged in, redirect to the main page
@@ -171,9 +175,7 @@ def create_account():
     }]
     return render_template('create_account.html', obj=u)
 
-
-
-
+# Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # If user is already logged in, redirect to the main page
@@ -196,7 +198,7 @@ def login():
     msg = session.pop('msg', 'Type your email and password to continue.')
     return render_template('login.html', title='Login', msg=msg)
   
-
+# Logout Route
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if session.get('user'):
@@ -207,7 +209,7 @@ def logout():
     print("Redirecting to /login.")
     return redirect('/login')
 
-
+# Admin Dashboard
 @app.route('/main')
 def main():
     print("Accessing /main route. Session data:", session)
@@ -250,7 +252,7 @@ def main():
         print("Unknown user type. Redirecting to /login.")
         return redirect('/login')
 
-
+# Analytical insights route
 @app.route('/insights')
 def insights():
     print("Accessing /insights route.")
@@ -367,7 +369,7 @@ def insights():
         breed_graph=breed_graph
     )
 
-
+# Schedule Appointment Route
 @app.route('/book_appointment', methods=['POST'])
 def book_appointment():
     if not session.get('user'):
@@ -395,6 +397,7 @@ def book_appointment():
     flash(f"Appointment for pet ID {pet_id} successfully booked!", "success")
     return redirect('/main')
 
+# Adoption Routes
 @app.route('/adopt', methods=['POST'])
 def adopt_pet():
     if not session.get('user'):
@@ -431,7 +434,7 @@ def adopt_pet():
         return redirect('/main')
 
 
-
+# Edit Shelter Route
 @app.route('/shelter/<int:shelter_id>')
 def shelter_pets(shelter_id):
     if not session.get('user') or session['user']['user_type'] != 'customer':
@@ -466,7 +469,7 @@ def shelter_pets(shelter_id):
 
 
 
-    
+# Manage Users Routes - CRUD Operations
 @app.route('/users/manage', methods=['GET', 'POST'])
 def manage_user():
     # Ensure the user is logged in and is an admin
@@ -521,7 +524,7 @@ def manage_user():
     return "Invalid action", 400  # Handle invalid actions
 
 
-
+# Manage Pets Routes - CRUD Operations
 @app.route('/pets/manage', methods=['GET', 'POST'])
 def manage_pet():
     if not checkSession() or session['user']['user_type'] != 'admin':
@@ -580,7 +583,7 @@ def manage_pet():
     return "Invalid action", 400  # Handle invalid actions
 
 
-
+# Manage Shelters Routes - CRUD Operations
 @app.route('/shelters/manage', methods=['GET', 'POST'])
 def manage_shelter():
     if not checkSession() or session['user']['user_type'] != 'admin':
@@ -632,6 +635,7 @@ def manage_shelter():
     return "Invalid action", 400  # Handle invalid actions
 
 
+# Manage Adoptions Routes - CRUD Operations
 @app.route('/adoptions/manage', methods=['GET', 'POST'])
 def manage_adoption():
     if not checkSession() or session['user']['user_type'] != 'admin':
@@ -706,7 +710,7 @@ def manage_adoption():
 
     return "Invalid action", 400  # Handle invalid actions
 
-
+# Manage Manage Routes - CRUD Operations
 @app.route('/appointments/manage', methods=['GET', 'POST'])
 def manage_appointment():
     if not checkSession() or session['user']['user_type'] != 'admin':
@@ -767,24 +771,10 @@ def manage_appointment():
     return "Invalid action", 400  # Handle invalid actions
 
 
-# endpoint route for static files
+# # endpoint to allow server to access for static files
 @app.route('/static/<path:path>')
 def send_static(path):
     return send_from_directory('static', path)
-
-# #standalone function to be called when we need to check if a user is logged in.
-# def checkSession():
-#     if 'active' in session.keys():
-#         timeSinceAct = time.time() - session['active']
-#         print(timeSinceAct)
-#         if timeSinceAct > 500:
-#             session['msg'] = 'Your session has timed out.'
-#             return False
-#         else:
-#             session['active'] = time.time()
-#             return True
-#     else:
-#         return False      
   
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)   
