@@ -136,19 +136,18 @@ CREATE TABLE `VB_Pets` (
 
 ### Transactional Queries:
 
-`
-SELECT
-            CASE
-                WHEN age < 1 THEN '0-1 years'
-                WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
-                ELSE '3+ years'
-            END as age_group,
-            COUNT(*) as count
-        FROM VB_Pets
-        GROUP BY age_group;
+```
+SELECT CASE
+            WHEN age < 1 THEN '0-1 years'
+            WHEN age BETWEEN 1 AND 3 THEN '1-3 years'
+            ELSE '3+ years'
+        END as age_group,
+        COUNT(*) as count
+    FROM VB_Pets
+    GROUP BY age_group;
 
 SELECT gender, COUNT(*) as count
 FROM VB_Pets
 GROUP BY gender;
-`
+```
 
