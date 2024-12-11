@@ -29,7 +29,7 @@
 [Insert relational diagram here, reflecting the updated version of the app.]
 
 ### ER Diagram (Optional)
-[ER Diagram](./ER_Diagram.jpeg)
+![ER Diagram](./ER_Diagram.jpeg)
 
 
 ## Credentials per User Role
