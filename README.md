@@ -24,12 +24,35 @@
 2. **Customer**
    - Main Purpose: Adopters can view pet listings, submit adoption requests, and view shelter listing. They cannot manage user roles.
    
-
-## Relational Diagram
-[Insert relational diagram here, reflecting the updated version of the app.]
-
 ### ER Diagram
 ![ER Diagram](./ER_Diagram.jpeg)
+
+
+## Relationships
+
+1.⁠ ⁠*VB_Users to VB_Shelters*
+   - One shelter can have multiple users.
+   - ⁠ VB_Users.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
+
+2.⁠ ⁠*VB_Shelters to VB_Pets*
+   - One shelter can have multiple pets available for adoption.
+   - ⁠ VB_Pets.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
+
+3.⁠ ⁠*VB_Users to VB_Appointments*
+   - One user can have multiple appointments.
+   - ⁠ VB_Appointments.user_id ⁠ references ⁠ VB_Users.user_id ⁠.
+
+4.⁠ ⁠*VB_Shelters to VB_Appointments*
+   - One shelter can have multiple appointments.
+   - ⁠ VB_Appointments.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
+
+5.⁠ ⁠*VB_Users to VB_Adoptions*
+   - One user can adopt multiple pets.
+   - ⁠ VB_Adoptions.user_id ⁠ references ⁠ VB_Users.user_id ⁠.
+
+6.⁠ ⁠*VB_Pets to VB_Adoptions*
+   - One pet can be adopted by one user.
+   - ⁠ VB_Adoptions.pet_id ⁠ references ⁠ VB_Pets.pet_id ⁠.
 
 
 ## Credentials per User Role
