@@ -30,14 +30,11 @@
 
 ## Relationships
 
-1.⁠ ⁠*VB_Users to VB_Shelters*
-   - One shelter can have multiple users.
-   - ⁠ VB_Users.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
+1. - One shelter can have multiple users.
 
-2.⁠ ⁠*VB_Shelters to VB_Pets*
-   - One shelter can have multiple pets available for adoption.
-   - ⁠ VB_Pets.shelter_id ⁠ references ⁠ VB_Shelters.shelter_id ⁠.
 
+2. - One shelter can have multiple pets available for adoption.
+  
 3.⁠ ⁠*VB_Users to VB_Appointments*
    - One user can have multiple appointments.
    - ⁠ VB_Appointments.user_id ⁠ references ⁠ VB_Users.user_id ⁠.
