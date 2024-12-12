@@ -1,37 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Shelters</title>
+    <link rel="stylesheet" href="/static/styles/shelters/list.css">
 </head>
 <body>
-    <h1>Shelter Management</h1>
-    <a href="/shelters/manage?action=new">Add New Shelter</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Contact</th>
-                <th>Website</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for shelter in shelters %}
-            <tr>
-                <td>{{ shelter['shelter_id'] }}</td>
-                <td>{{ shelter['shelter_name'] }}</td>
-                <td>{{ shelter['address'] }}</td>
-                <td>{{ shelter['contact'] }}</td>
-                <td>{{ shelter['website_url'] }}</td>
-                <td>
-                    <a href="/shelters/manage?action=edit&pkval={{ shelter['shelter_id'] }}">Edit</a>
-                    <a href="/shelters/manage?action=delete&pkval={{ shelter['shelter_id'] }}" onclick="return confirm('Are you sure you want to delete this shelter?')">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="/main">Dashboard</a></li>
+            <li><a href="/appointments/manage">Manage Appointments</a></li>
+            <li><a href="/pets/manage">Manage Pets</a></li>
+            <li><a href="/adoptions/manage">Adoption Requests</a></li>
+            <li><a href="/users/manage">Manage Users</a></li>
+            <li><a href="/shelters/manage">Manage Shelters</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Shelter Management</h1>
+        <a href="/shelters/manage?action=new">Add New Shelter</a>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Website</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shelter in shelters %}
+                <tr>
+                    <td>{{ shelter['shelter_id'] }}</td>
+                    <td>{{ shelter['shelter_name'] }}</td>
+                    <td>{{ shelter['address'] }}</td>
+                    <td>{{ shelter['contact'] }}</td>
+                    <td>{{ shelter['website_url'] }}</td>
+                    <td>
+                        <a href="/shelters/manage?action=edit&pkval={{ shelter['shelter_id'] }}">Edit</a>
+                        <a href="/shelters/manage?action=delete&pkval={{ shelter['shelter_id'] }}" onclick="return confirm('Are you sure you want to delete this shelter?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
